@@ -1,58 +1,145 @@
-#include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
-#include <time.h>
+#include <math.h>
 #include "particle.h"
 
-#define NUM_PARTICLES 8500
-#define WIDTH 1500
-#define HEIGHT 800
-#define DT 0.032f // 60 FPS
-#define TIME 60.0f
+#define GRAVITY 9.8f
+#define DAMPING 0.5f
+#define NUM_COLORS 7
+int counter = 0;
 
-void output_particles_to_csv(Particle particles[], int num_particles, FILE *file) {
-    for (int i = 0; i < num_particles; i++) {
-        fprintf(file, "%f,%f,%f,%f,%f\n", particles[i].x, particles[i].y, particles[i].color_r, particles[i].color_g, particles[i].color_b);
+void initialize_particle(Particle *particle, float width, float height, int index) {
+    // right-left alternate
+    if (counter % 2 == 0) {
+        particle->x = 0.0f;
+    } else {
+        particle->x = width;
     }
-    fprintf(file, "\n");
+
+    particle->y = 0.0f;
+    particle->prev_x = particle->x;
+    particle->prev_y = particle->y;
+    particle->radius = RADIUS;
+    particle->mass = particle->radius;
+    particle->x_vel = 0.0f;
+    particle->y_vel = 0.0f;
+
+    int color_index = index / 2;
+    particle->color_index = color_index % NUM_COLORS;
+
+    // RGB values based on the color index
+    static float COLORS[NUM_COLORS][3] = {
+            {1.0f, 0.0f, 0.0f},    // Red
+            {1.0f, 0.647f, 0.0f},  // Orange
+            {1.0f, 1.0f, 0.0f},    // Yellow
+            {0.0f, 1.0f, 0.0f},    // Green
+            {0.0f, 0.0f, 1.0f},    // Blue
+            {0.294f, 0.0f, 0.509f}, // Indigo
+            {0.502f, 0.0f, 0.502f} // Violet
+    };
+
+    particle->color_r = COLORS[particle->color_index][0];
+    particle->color_g = COLORS[particle->color_index][1];
+    particle->color_b = COLORS[particle->color_index][2];
+
+    counter += 1;
 }
 
-int main() {
-    srand(time(NULL));
 
-    Particle particles[NUM_PARTICLES];
-    int current_particle_count = 0;
+void update_particles(Particle particles[], int num_particles, float dt, float width) {
+    for (int i = 0; i < num_particles; i++) {
+        float temp_x = particles[i].x;
+        float temp_y = particles[i].y;
 
-    FILE *file = fopen("simulation.csv", "w");
-    if (!file) {
-        fprintf(stderr, "could not open the file!\n");
-        return 1;
+        // acceleration of gravity
+        float acceleration_y = GRAVITY * dt * dt;
+
+        // position
+        particles[i].x += (particles[i].x - particles[i].prev_x);
+        particles[i].y += (particles[i].y - particles[i].prev_y) + acceleration_y;
+
+        // velocity
+        particles[i].x_vel = (particles[i].x - particles[i].prev_x) / dt;
+        particles[i].y_vel = (particles[i].y - particles[i].prev_y + acceleration_y) / dt;
+
+        particles[i].prev_x = temp_x;
+        particles[i].prev_y = temp_y;
     }
+}
 
-    float current_time = 0.0f;
-    float particle_creation_time = 0.0f;
-
-    while (current_time < TIME) {
-        // new particles
-        if (current_particle_count < NUM_PARTICLES && current_time >= particle_creation_time) {
-            initialize_particle(&particles[current_particle_count], WIDTH, HEIGHT, current_particle_count);
-            current_particle_count++;
-            particle_creation_time += 0.0000000000000000000005f;
+void handle_collisions(Particle particles[], int num_particles, float width, float height) {
+    for (int i = 0; i < num_particles; i++) {
+        // Collision with walls
+        // left
+        if (particles[i].x - particles[i].radius < 0) {
+            particles[i].x = particles[i].radius;
+            particles[i].x_vel *= -1; // Reverse x-direction
+        }
+        // right
+        if (particles[i].x + particles[i].radius > width) {
+            particles[i].x = width - particles[i].radius;
+            particles[i].x_vel *= -1; // Reverse x-direction
+        }
+        // top
+        if (particles[i].y - particles[i].radius < 0) {
+            particles[i].y = particles[i].radius;
+            particles[i].y_vel *= -1; // Reverse y-direction
+        }
+        // bottom
+        if (particles[i].y + particles[i].radius > height) {
+            particles[i].y = height - particles[i].radius;
+            particles[i].y_vel *= -1; // Reverse y-direction
         }
 
-        update_particles(particles, current_particle_count, DT, WIDTH);
+        // collision with other particles
+        for (int j = i + 1; j < num_particles; j++) {
+            float dx = particles[i].x - particles[j].x;
+            float dy = particles[i].y - particles[j].y;
+            float distance = sqrtf(dx * dx + dy * dy);
+            float min_distance = particles[i].radius + particles[j].radius;
 
-        handle_collisions(particles, current_particle_count, WIDTH, HEIGHT);
+            if (distance < min_distance) {
+                // calculate overlap
+                float overlap = 0.5f * (distance - min_distance);
 
-        output_particles_to_csv(particles, current_particle_count, file);
+                // direction of collision
+                float collision_dir_x = dx / distance;
+                float collision_dir_y = dy / distance;
 
-        // frame delay
-        usleep((int)(DT * 100));
-        current_time += DT;
+                // move particles apart
+                particles[i].x -= overlap * collision_dir_x;
+                particles[i].y -= overlap * collision_dir_y;
+                particles[j].x += overlap * collision_dir_x;
+                particles[j].y += overlap * collision_dir_y;
+
+                // calculate relative velocity
+                float rel_vel_x = particles[j].x_vel - particles[i].x_vel;
+                float rel_vel_y = particles[j].y_vel - particles[i].y_vel;
+
+                // calculate the normal component of relative velocity
+                float normal_vel = rel_vel_x * collision_dir_x + rel_vel_y * collision_dir_y;
+
+                // determine which particle is faster
+                float speed_i = sqrtf(particles[i].x_vel * particles[i].x_vel + particles[i].y_vel * particles[i].y_vel);
+                float speed_j = sqrtf(particles[j].x_vel * particles[j].x_vel + particles[j].y_vel * particles[j].y_vel);
+
+                if (speed_i > speed_j) {
+                    particles[j].color_r = particles[i].color_r;
+                    particles[j].color_g = particles[i].color_g;
+                    particles[j].color_b = particles[i].color_b;
+                } else {
+                    particles[i].color_r = particles[j].color_r;
+                    particles[i].color_g = particles[j].color_g;
+                    particles[i].color_b = particles[j].color_b;
+                }
+
+                // update velocities
+                particles[i].x_vel += normal_vel * collision_dir_x * DAMPING;
+                particles[i].y_vel += normal_vel * collision_dir_y * DAMPING;
+                particles[j].x_vel -= normal_vel * collision_dir_x * DAMPING;
+                particles[j].y_vel -= normal_vel * collision_dir_y * DAMPING;
+            }
+        }
     }
-
-    fclose(file);
-
-    return 0;
 }
+
 
