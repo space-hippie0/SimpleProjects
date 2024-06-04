@@ -33,11 +33,11 @@ int main() {
     float particle_creation_time = 0.0f;
 
     while (current_time < TIME) {
-        // New particles
+        // new particles
         if (current_particle_count < NUM_PARTICLES && current_time >= particle_creation_time) {
             initialize_particle(&particles[current_particle_count], WIDTH, HEIGHT, current_particle_count);
             current_particle_count++;
-            particle_creation_time += 0.0000000000000000000005f; // # milliseconds
+            particle_creation_time += 0.0000000000000000000005f;
         }
 
         update_particles(particles, current_particle_count, DT, WIDTH);
@@ -51,7 +51,6 @@ int main() {
         current_time += DT;
     }
 
-    // Close the CSV file
     fclose(file);
 
     return 0;
