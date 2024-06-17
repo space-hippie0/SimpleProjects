@@ -21,7 +21,7 @@ typedef struct {
 } Particle;
 
 
-#define RADIUS 10.0f
+#define RADIUS 5.0f
 
 void initialize_particle(Particle *particle, float width, float height, int index); // Updated to initialize a single particle
 void update_particles(Particle particles[], int num_particles, float dt, float width); // Added width parameter
