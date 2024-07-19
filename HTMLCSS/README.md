@@ -1,4 +1,2 @@
-[Just started freecodecamp.org program](#just-started-freecodecamporg-program)
-
-### Just started freecodecamp.org program
+### Just started freecodecamp.org program at
 [freeCodeCamp](https://freecodecamp.org)
