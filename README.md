@@ -8,14 +8,3 @@ I started making simple projects in various languages to enhance my coding skill
 
 ### Progress == Cheatsheet
 
-
-## Featured Projects
-
-### 1. Project
-
-### 2. Project
-
-### 3. Project
-
-
-**by Mert**
