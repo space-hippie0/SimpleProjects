@@ -1,1 +1,1 @@
-### Just started freecodecamp.org program at [freeCodeCamp](https://freecodecamp.org)
+### Just started a program at [freeCodeCamp](https://freecodecamp.org)
