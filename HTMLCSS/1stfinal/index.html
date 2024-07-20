@@ -1,1 +1,62 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SURVEY FORM</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+    <h1 id="title">SURVEY FORM</h1>
+    <p id="description">please fill out the form below:</p>
+</header>
+<main>
+    <form id="survey-form">
+        <div class="form-group">
+            <label id="name-label" for="name">Name:</label>
+            <input type="text" id="name" name="name" placeholder="Enter your name" required>
+        </div>
+        <div class="form-group">
+            <label id="email-label" for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+        </div>
+        <div class="form-group">
+            <label id="number-label" for="number">Age:</label>
+            <input type="number" id="number" name="age" min="1" max="120" placeholder="Enter your age" required>
+        </div>
+        <div class="form-group">
+            <label for="dropdown">Which option best describes your current role?</label>
+            <select id="dropdown" name="role" required>
+                <option value="">Select an option</option>
+                <option value="student">Student</option>
+                <option value="full-time-job">Full-time job</option>
+                <option value="part-time-job">Part-time job</option>
+                <option value="freelancer">Freelancer</option>
+                <option value="prefer-not-to-say">Prefer not to say</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Would you recommend this service to a friend?</label>
+            <label><input type="radio" name="recommend" value="definitely" required> Definitely</label>
+            <label><input type="radio" name="recommend" value="maybe"> Maybe</label>
+            <label><input type="radio" name="recommend" value="not-sure"> Not sure</label>
+        </div>
+        <div class="form-group">
+            <label>What do you like about our service? (Check all that apply)</label>
+            <label><input type="checkbox" name="features" value="quality"> Quality</label>
+            <label><input type="checkbox" name="features" value="speed"> Speed</label>
+            <label><input type="checkbox" name="features" value="price"> Price</label>
+            <label><input type="checkbox" name="features" value="customer-service"> Customer Service</label>
+        </div>
+        <div class="form-group">
+            <label for="comments">Additional comments:</label>
+            <textarea id="comments" name="comments" placeholder="Enter your comments here..."></textarea>
+        </div>
+        <div class="form-group">
+            <button type="submit" id="submit">Submit</button>
+        </div>
+    </form>
+</main>
+</body>
+</html>
