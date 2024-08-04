@@ -6,5 +6,5 @@ Welcome to **SimpleProjects**, a repository dedicated to my journey of creating 
 
 I started making simple projects in various languages to enhance my coding skills and explore new technologies. Each project is a step forward in my programming journey, and I hope it can be a helpful resource for others too.
 
-### Progress == Cheatsheet
+### Progress == Cheatsheet ✅
 
