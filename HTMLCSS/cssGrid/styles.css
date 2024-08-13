@@ -34,12 +34,19 @@ main {
   grid-template-columns: minmax(2rem, 1fr) minmax(min-content, 94rem) minmax(2rem, 1fr);
   row-gap: 3rem;
 }
+
 .heading {
   grid-column: 2 / 3;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   row-gap: 1.5rem;
 }
+
 .text {
   grid-column: 2 / 3;
+}
+
+.hero {
+  grid-column: 1 / -1;
+  position: relative;
 }
