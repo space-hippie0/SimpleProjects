@@ -6,3 +6,9 @@
   height: 55vw;
   width: 55vw;
 }
+
+.line {
+  background-color: black;
+  width: 50%;
+  height: 2px;
+}
