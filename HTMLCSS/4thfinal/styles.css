@@ -1,1 +1,142 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
+body {
+    font-family: Montserrat, sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    scroll-behavior: smooth;
+    background-color: #000;
+    color: #FFA500;
+}
+
+header {
+    background: #333;
+    color: #fff;
+    padding: 0.5rem 0;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    overflow: hidden;
+}
+
+#header-img {
+    display: flex;
+    margin-right: 35rem;
+    max-width: 100px;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.nav-link {
+    color: #FFA500;
+    text-decoration: none;
+    padding: 0.5rem;
+    transition: background 0.3s, transform 0.3s;
+}
+
+.nav-link:hover {
+    background: #555;
+    transform: scale(1.1);
+}
+
+main {
+    padding: 2rem;
+    max-width: 1000px;
+    margin: auto;
+    background-color: #000;
+}
+
+p {
+    color: #FFFFFF;
+}
+
+section {
+    margin-bottom: 2rem;
+}
+
+.feature {
+    margin-bottom: 3rem;
+}
+
+#video {
+    display: block;
+    margin: 0 auto;
+}
+
+#video-section {
+    text-align: center;
+}
+
+#video-section iframe {
+    display: inline-block;
+    margin-top: 1rem;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+}
+
+input[type="email"],
+input[type="submit"] {
+    padding: 0.5rem;
+    font-size: 1rem;
+    width: 100%;
+    max-width: 300px;
+}
+
+input[type="submit"] {
+    background: #FFA500;
+    color: #000;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+}
+
+input[type="submit"]:hover {
+    background: #ff8c00;
+    transform: scale(1.05);
+}
+
+footer {
+    background: #333;
+    color: #fff;
+    text-align: center;
+    padding: 1rem 0;
+    position: relative;
+    width: 100%;
+}
+
+@media only screen and (max-width: 720px) {
+    nav {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    #video {
+        width: 100%;
+        height: auto;
+    }
+
+    input[type="email"],
+    input[type="submit"] {
+        width: 100%;
+    }
+}
