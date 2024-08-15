@@ -90,3 +90,12 @@ body {
   border-radius: 0% 0% 100% 100%;
   opacity: 70%;
 }
+
+.ground {
+  width: 100vw;
+  height: 400px;
+  background: linear-gradient(90deg, rgb(88, 175, 236), rgb(182, 255, 255));
+  z-index: 3;
+  position: absolute;
+  margin-top: -58px;
+}
