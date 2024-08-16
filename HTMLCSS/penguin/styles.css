@@ -201,3 +201,14 @@ body {
   top: 85%;
   border-radius: 50%;
 }
+
+.foot.left {
+  left: 25%;
+  transform: rotate(80deg)
+
+}
+
+.foot.right {
+  right: 25%;
+  transform: rotate(-80deg)
+}
