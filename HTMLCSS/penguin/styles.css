@@ -51,10 +51,16 @@ body {
   margin-top: 75px;
   z-index: 4;
   position: relative;
+  transition: transform 1s ease-in-out 0ms;
 }
 
 .penguin * {
   position: absolute;
+}
+
+.penguin:active {
+  transform: scale(1.5);
+  cursor: not-allowed;
 }
 
 .penguin-head {
@@ -212,7 +218,7 @@ body {
   left: 5%;
   transform-origin: top left; 
   transform: rotate(130deg) scaleX(-1);
-
+  animation: 3s linear infinite wave;
 }
 
 .arm.right {
@@ -262,4 +268,5 @@ body {
   z-index: 3;
   position: absolute;
   margin-top: -58px;
+  height: calc(100vh - 300px);
 }
