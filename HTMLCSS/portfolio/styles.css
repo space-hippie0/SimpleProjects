@@ -1,1 +1,119 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+body {
+    font-family: Helvetica, sans-serif;
+    color: #fff;
+    background: linear-gradient(45deg, #1a1a1a, #4b79a1, #283e51, #f39c12);
+    background-size: 400% 400%;
+    animation: gradientBackground 15s ease infinite;
+}
+
+#navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 1rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+}
+
+#navbar ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+}
+
+#navbar li {
+    margin: 0 1rem;
+}
+
+#navbar a {
+    text-decoration: none;
+    color: #fff;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+#navbar a:hover {
+    color: #f39c12;
+    transform: scale(1.1);
+}
+
+#welcome-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(to right, #4b79a1, #283e51);
+    text-align: center;
+    padding: 50px 0;
+}
+
+#welcome-section h1 {
+    font-size: 3rem;
+    animation: fadeIn 2s ease-in-out;
+    color: #f39c12;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+#projects {
+    padding: 6rem 2rem;
+    background: linear-gradient(135deg, #222, #4b79a1, #283e51);
+    text-align: center;
+    animation: gradientBackground 15s ease infinite;
+}
+
+#projects h2 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: #f39c12;
+}
+
+.project-tile {
+    margin: 2rem 0;
+    padding: 2rem;
+    background: linear-gradient(45deg, #333, #444);
+    border-radius: 8px;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.project-tile:hover {
+    transform: scale(1.05);
+    background-color: #555;
+}
+
+.project-tile a {
+    text-decoration: none;
+    color: #f39c12;
+    font-size: 1.2rem;
+    transition: color 0.3s ease;
+}
+
+.project-tile a:hover {
+    color: #fff;
+}
+
+@media (max-width: 600px) {
+    #welcome-section h1 {
+        font-size: 2rem;
+    }
+
+    .project-tile {
+        padding: 1rem;
+    }
+}
 
