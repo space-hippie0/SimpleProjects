@@ -1,6 +1,7 @@
 :root {
   --penguin-face: white;
   --penguin-picorna: orange;
+  --penguin-skin: gray;
 }
 
 body {
@@ -61,7 +62,7 @@ body {
   height: 45%;
   background: linear-gradient(
     45deg,
-    gray,
+    var(--penguin-skin),
     rgb(239, 240, 228)
   );
   border-radius: 70% 70% 65% 65%;
@@ -187,11 +188,52 @@ body {
   position: absolute;
   width: 50%;
   height: 45%;
-  background-color: gray;
+  background-color: var(--penguin-skin);
   top: 10%;
   left: 25%;
   border-radius: 0% 0% 100% 100%;
   opacity: 70%;
+}
+
+.arm {
+  width: 30%;
+  height: 60%;
+  background: linear-gradient(
+    90deg,
+    var(--penguin-skin),
+    rgb(209, 210, 199)
+  );
+  border-radius: 30% 30% 30% 120%;
+  z-index: -1;
+}
+
+.arm.left {
+  top: 35%;
+  left: 5%;
+  transform-origin: top left; 
+  transform: rotate(130deg) scaleX(-1);
+
+}
+
+.arm.right {
+  top: 0%;
+  right: -5%;
+  transform: rotate(-45deg);
+}
+
+@keyframes wave {
+  10% {
+    transform: rotate(110deg) scaleX(-1);
+  }
+  20% {
+    transform: rotate(130deg) scaleX(-1);
+  }
+  30% {
+    transform: rotate(110deg) scaleX(-1);
+  }
+  40% {
+    transform: rotate(130deg) scaleX(-1);
+  }
 }
 
 .foot {
@@ -200,17 +242,17 @@ body {
   background-color: var(--penguin-picorna);
   top: 85%;
   border-radius: 50%;
+  z-index: -1;
 }
 
 .foot.left {
   left: 25%;
-  transform: rotate(80deg)
-
+  transform: rotate(80deg);
 }
 
 .foot.right {
   right: 25%;
-  transform: rotate(-80deg)
+  transform: rotate(-80deg);
 }
 
 .ground {
