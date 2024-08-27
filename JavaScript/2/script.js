@@ -47,7 +47,7 @@ function update(location) {
 }
 
 function goTown() {
-
+  update(locations);
 }
 
 function goStore() {
