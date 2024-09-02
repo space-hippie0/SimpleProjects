@@ -43,7 +43,7 @@ function update(location) {
   button1.onclick = location["button functions"][0];
   button2.onclick = location["button functions"][1];
   button3.onclick = location["button functions"][2];
-  text.innerText = "You are in the town square. You see a sign that says \"Store\".";
+  text.innerText = location.text;
 }
 
 function goTown() {
