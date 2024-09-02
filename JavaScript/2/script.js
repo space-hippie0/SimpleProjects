@@ -84,3 +84,34 @@ function buyHealth() {
     text.innerText = "You do not have enough gold to buy health.";
   }
 }
+
+function buyWeapon() {
+  if (currentWeaponIndex < weapons.length - 1) {  // Check if the player can still buy more weapons
+    if (gold >= 30) {
+      gold -= 30;
+      currentWeaponIndex++;
+      goldText.innerText = gold;
+      let newWeapon = weapons[currentWeaponIndex].name;
+      text.innerText = "You now have a " + newWeapon + ".";
+      inventory.push(newWeapon);
+
+      // Create a string of inventory items
+      let inventoryList = inventory.join(", ");
+      
+      // Update the text to include inventory
+      text.innerText += " In your inventory you have: " + inventoryList + ".";
+    } else {
+      text.innerText = "You do not have enough gold to buy a weapon.";
+    }
+  } else {
+    text.innerText = "You already have the most powerful weapon!";
+  }
+}
+
+function fightSlime() {
+
+}
+
+function fightBeast() {
+
+}
