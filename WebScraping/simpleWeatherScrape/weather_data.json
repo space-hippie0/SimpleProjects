@@ -1,0 +1,194 @@
+{
+    "cities": [
+        {
+            "city": "EDİRNE",
+            "temperature": "27°C"
+        },
+        {
+            "city": "İSTANBUL",
+            "temperature": "26°C"
+        },
+        {
+            "city": "KIRKLARELİ",
+            "temperature": "23°C"
+        },
+        {
+            "city": "KOCAELİ",
+            "temperature": "27°C"
+        },
+        {
+            "city": "AFYONKARAHİSAR",
+            "temperature": "27°C"
+        },
+        {
+            "city": "İZMİR",
+            "temperature": "29°C"
+        },
+        {
+            "city": "MANİSA",
+            "temperature": "30°C"
+        },
+        {
+            "city": "MUĞLA",
+            "temperature": "28°C"
+        },
+        {
+            "city": "ADANA",
+            "temperature": "33°C"
+        },
+        {
+            "city": "ANTALYA",
+            "temperature": "31°C"
+        },
+        {
+            "city": "HATAY",
+            "temperature": "31°C"
+        },
+        {
+            "city": "ISPARTA",
+            "temperature": "31°C"
+        },
+        {
+            "city": "ANKARA",
+            "temperature": "32°C"
+        },
+        {
+            "city": "ESKİŞEHİR",
+            "temperature": "29°C"
+        },
+        {
+            "city": "KONYA",
+            "temperature": "32°C"
+        },
+        {
+            "city": "YOZGAT",
+            "temperature": "29°C"
+        },
+        {
+            "city": "BOLU",
+            "temperature": "29°C"
+        },
+        {
+            "city": "DÜZCE",
+            "temperature": "31°C"
+        },
+        {
+            "city": "SİNOP",
+            "temperature": "32°C"
+        },
+        {
+            "city": "ZONGULDAK",
+            "temperature": "27°C"
+        },
+        {
+            "city": "AMASYA",
+            "temperature": "36°C"
+        },
+        {
+            "city": "ARTVİN",
+            "temperature": "27°C"
+        },
+        {
+            "city": "SAMSUN",
+            "temperature": "31°C"
+        },
+        {
+            "city": "TRABZON",
+            "temperature": "28°C"
+        },
+        {
+            "city": "ERZURUM",
+            "temperature": "26°C"
+        },
+        {
+            "city": "KARS",
+            "temperature": "23°C"
+        },
+        {
+            "city": "MALATYA",
+            "temperature": "34°C"
+        },
+        {
+            "city": "VAN",
+            "temperature": "25°C"
+        },
+        {
+            "city": "DİYARBAKIR",
+            "temperature": "38°C"
+        },
+        {
+            "city": "GAZİANTEP",
+            "temperature": "35°C"
+        },
+        {
+            "city": "SİİRT",
+            "temperature": "36°C"
+        },
+        {
+            "city": "ŞANLIURFA",
+            "temperature": "37°C"
+        }
+    ],
+    "regions": [
+        {
+            "region": "MARMARA",
+            "description": [
+                "Parçalı yer yer çok bulutlu, bölge genelinin (Çanakkale haric) yerel sağanak ve gök gürültülü sağanak yağışlı geçeceği tahmin ediliyor. Yağışların İstanbul çevrelerinde yerel kuvvetli olması bekleniyor."
+            ]
+        },
+        {
+            "region": "EGE",
+            "description": [
+                "Parçalı bulutlu, bölgenin kıyı kesimlerinin bu gece ve sabah saatlerinde yerel sağanak ve gök gürültülü sağanak yağışlı geçeceği tahmin ediliyor."
+            ]
+        },
+        {
+            "region": "AKDENİZ",
+            "description": [
+                "Parçalı ve az bulutlu, zamanla doğusunun yer yer çok bulutlu geçeceği tahmin ediliyor. Rüzgarın, bölgenin kıyılarında güney ve batılı yönlerden yer yer kuvvetli (40-60 km/saat) esmesi bekleniyor."
+            ]
+        },
+        {
+            "region": "İÇ ANADOLU",
+            "description": [
+                "Parçalı ve az bulutlu geçeceği tahmin ediliyor."
+            ]
+        },
+        {
+            "region": "BATI KARADENİZ",
+            "description": [
+                "Parçalı bulutlu, öğle saatlerinde bölge genelinin (Sinop haric) yerel sağanak ve gök gürültülü sağanak yağışlı geçeceği tahmin ediliyor. Yağışların, kıyı kesimlerde yerel kuvvetli olması bekleniyor."
+            ]
+        },
+        {
+            "region": "ORTA ve DOĞU KARADENİZ",
+            "description": [
+                "Parçalı yer yer çok bulutlu geçeceği tahmin ediliyor."
+            ]
+        },
+        {
+            "region": "DOĞU ANADOLU",
+            "description": [
+                "Az bulutlu, kuzey ve doğu kesimlerinin parçalı ve yer yer çok bulutlu, bu akşam ilk saatlerinde Kars ve Hakkari çevrelerinde yerel sağanak ve gök gürültülü sağanak yağışlı geçeceği tahmin ediliyor."
+            ]
+        },
+        {
+            "region": "GÜNEYDOĞU ANADOLU",
+            "description": [
+                "Az bulutlu ve açık geçeceği tahmin ediliyor."
+            ]
+        },
+        {
+            "region": "KARADENİZ",
+            "description": [
+                "Hava Durumu: Parçalı ve çok bulutlu, Orta ve Batı Karadeniz sağanak ve gök gürültülü sağanak yağışlı, Rüzgar: Batı Karadeniz'de kuzey ve kuzeybatı, doğusu kuzeydoğudan 3 ila 5, yer yer 6; Doğu Karadeniz'de doğu ve güneydoğu, doğusu kuzeydoğudan 3 ila 5 kuvvetinde, Dalga: 1,0 ila 2,0 m, Görüş: İyi."
+            ]
+        },
+        {
+            "region": "VAN GÖLÜ",
+            "description": [
+                "Hava Durumu: Parçalı ve az bulutlu, Rüzgar:  Doğu ve kuzeydoğudan, öğle ve akşam saatlerinde güneybatıdan 2 ila 4, yer yer 5 kuvvetinde, Dalga: 0,25 ila 0,75 m, Görüş: İyi."
+            ]
+        }
+    ]
+}
