@@ -8,6 +8,27 @@ function searchGoogle(query) {
     window.open(`https://www.google.com/search?q=${encodeURIComponent(query)}`, '_blank');
 }
 
+// Function to handle GIF lazy loading
+function loadGif() {
+    const gifContainer = document.getElementById('gif-container');
+    const gifImage = gifContainer.querySelector('img');
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                gifImage.src = gifImage.getAttribute('data-src');
+                observer.unobserve(gifContainer);
+            }
+        });
+    }, { threshold: 0.1 });
+
+    observer.observe(gifContainer);
+}
+
+// Initialize GIF lazy loading
+document.addEventListener('DOMContentLoaded', loadGif);
+
+
 // Add event listeners to buttons
 document.getElementById('citiesButton').addEventListener('click', () => {
     scrollToElement('cities');
@@ -45,4 +66,3 @@ fetch('weather_data.json')
         });
     })
     .catch(error => console.error('Error fetching data:', error));
-
