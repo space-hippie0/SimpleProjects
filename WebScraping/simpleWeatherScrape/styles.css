@@ -9,15 +9,39 @@ body {
 }
 
 .container {
-    width: 80%;
+    width: 90%;
     max-width: 1200px;
-    margin: 20px auto; /* Center the container horizontally */
+    margin: 30px auto; /* Increased margin for better spacing */
     padding: 20px;
     background: #34495e; /* Darker gray background for the container */
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Darker shadow */
+    border-radius: 15px; /* More rounded corners */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.4); /* Softer shadow */
     box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    transition: background 0.3s ease; /* Smooth transition for background */
 }
+
+.container:hover {
+    background: #2c3e50; /* Slightly darker background on hover */
+}
+
+.button {
+    background-color: #9b59b6; /* Lighter purple for the default button background */
+    color: #ecf0f1; /* Light gray text */
+    border: none;
+    border-radius: 10px; /* More rounded corners for buttons */
+    padding: 12px 25px; /* Increased padding */
+    font-size: 1.1em; /* Slightly larger font size */
+    font-weight: bold;
+    margin: 0 15px; /* Increased margin */
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.button:hover {
+    background-color: #8e44ad; /* Darker purple on hover */
+    transform: scale(1.1); /* Slightly larger scale on hover */
+}
+
 
 h1 {
     text-align: center;
@@ -29,24 +53,6 @@ h1 {
     display: flex;
     justify-content: center;
     margin-bottom: 20px;
-}
-
-.button {
-    background-color: #8e44ad; /* Dark purple background */
-    color: #ecf0f1; /* Light gray text */
-    border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
-    font-size: 1em;
-    font-weight: bold;
-    margin: 0 10px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-.button:hover {
-    background-color: #9b59b6; /* Lighter purple on hover */
-    transform: scale(1.05);
 }
 
 .cities-grid, .regions-grid {
