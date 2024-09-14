@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weather Forecast</title>
+    <title>Hava Durumu</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -16,14 +16,14 @@
     </div>
 
     <div class="container">
-        <h1>Weather Forecast</h1>
+        <h1>HAVA DURUMU</h1>
         <div class="buttons">
             <button class="button" id="citiesButton">CITIES</button>
             <button class="button" id="regionsButton">SEAS</button>
         </div>
         <div id="cities" class="cities-grid"></div>
         <!-- Add the GIF here -->
-        <div class="gif-container">
+        <div id="gif-container" class="gif-container">
             <img src="https://i.pinimg.com/originals/3d/1c/e3/3d1ce3fb1985505ba88e01e525a8f841.gif" alt="Weather GIF">
         </div>
         <div id="regions" class="regions-grid"></div>
@@ -34,50 +34,7 @@
         <p>Space Hippie Reports<br>Torino, 2024</p>
     </footer>
 
-    <script>
-        // Function to scroll smoothly to an element
-        function scrollToElement(id) {
-            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
-        }
-
-        // Function to search for a city or region on Google
-        function searchGoogle(query) {
-            window.open(`https://www.google.com/search?q=${encodeURIComponent(query)}`, '_blank');
-        }
-
-        // Add event listeners to buttons
-        document.getElementById('citiesButton').addEventListener('click', () => {
-            scrollToElement('cities');
-        });
-
-        document.getElementById('regionsButton').addEventListener('click', () => {
-            scrollToElement('regions');
-        });
-
-        fetch('weather_data.json')
-            .then(response => response.json())
-            .then(data => {
-                const citiesContainer = document.getElementById('cities');
-                const regionsContainer = document.getElementById('regions');
-
-                data.cities.forEach(city => {
-                    const cityDiv = document.createElement('div');
-                    cityDiv.className = 'city';
-                    cityDiv.innerHTML = `<h2>${city.city}</h2><div class="temperature">${city.temperature}</div>`;
-                    cityDiv.addEventListener('click', () => searchGoogle(city.city)); // Add click event listener
-                    citiesContainer.appendChild(cityDiv);
-                });
-
-                data.regions.forEach(region => {
-                    const regionDiv = document.createElement('div');
-                    regionDiv.className = 'region';
-                    regionDiv.innerHTML = `<h2>${region.region}</h2><div class="description">${region.description.map(paragraph => `<p>${paragraph}</p>`).join('')}</div>`;
-                    regionDiv.addEventListener('click', () => searchGoogle(region.region)); // Add click event listener
-                    regionsContainer.appendChild(regionDiv);
-                });
-            })
-            .catch(error => console.error('Error fetching data:', error));
-    </script>
+    <!-- Link to the external JavaScript file -->
+    <script src="script.js"></script>
 </body>
 </html>
-
