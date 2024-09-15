@@ -31,6 +31,7 @@ function addEntry() {
   />`;
   targetInputContainer.insertAdjacentHTML('beforeend', HTMLString);
 }
+
 function calculateCalories(e) {
   e.preventDefault();
   isError = false;
@@ -54,7 +55,16 @@ function calculateCalories(e) {
 
   const consumedCalories = breakfastCalories + lunchCalories + dinnerCalories + snacksCalories;
   const remainingCalories = budgetCalories - consumedCalories + exerciseCalories;
+  const surplusOrDeficit = remainingCalories < 0 ? 'Surplus' : 'Deficit';
+  output.innerHTML = `
+  <span class="${surplusOrDeficit.toLowerCase()}">${Math.abs(remainingCalories)} Calorie ${surplusOrDeficit}</span>
+  <hr>
+  <p>${budgetCalories} Calories Budgeted</p>
+  <p>${consumedCalories} Calories Consumed</p>
+  <p>${exerciseCalories} Calories Burned</p>
+  `;
 
+  output.classList.remove('hide');
 }
 
 function getCaloriesFromInputs(list) {
@@ -74,5 +84,18 @@ function getCaloriesFromInputs(list) {
   return calories;
 }
 
-addEntryButton.addEventListener("click", addEntry);
+function clearForm() {
+  const inputContainers = Array.from(document.querySelectorAll('.input-container'));
 
+  for (const container of inputContainers) {
+    container.innerHTML = '';
+  }
+
+  budgetNumberInput.value = '';
+  output.innerText = '';
+  output.classList.add('hide');
+}
+
+addEntryButton.addEventListener("click", addEntry);
+calorieCounter.addEventListener("submit", calculateCalories);
+clearButton.addEventListener('click', clearForm);
