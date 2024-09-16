@@ -1,4 +1,13 @@
-document.getElementById('check-btn').addEventListener('click', function() {
+document.getElementById('check-btn').addEventListener('click', checkPalindrome);
+
+document.getElementById('text-input').addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+        event.preventDefault();
+        checkPalindrome();
+    }
+});
+
+function checkPalindrome() {
     const inputText = document.getElementById('text-input').value;
     const resultElement = document.getElementById('result');
 
@@ -18,5 +27,6 @@ document.getElementById('check-btn').addEventListener('click', function() {
     } else {
         resultElement.textContent = `${inputText} is not a palindrome`;
     }
-});
 
+    document.getElementById('text-input').value = '';
+}
