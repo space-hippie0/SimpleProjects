@@ -47,13 +47,10 @@ follow_buttons = driver.find_elements(By.XPATH, "//input[@value='Follow']")
 # Scroll into view and click all the "Follow" buttons
 for button in follow_buttons:
     driver.execute_script("arguments[0].scrollIntoView(true);", button)
-    WebDriverWait(driver, 10).until(EC.element_to_be_clickable(button))  # Ensure it's clickable
+    WebDriverWait(driver, 10).until(EC.element_to_be_clickable(button))
     button.click()
     time.sleep(1)
 
-# Wait for some time to let the clicks go through
 time.sleep(5)
-
-# Close the browser
 driver.quit()
 
