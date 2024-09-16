@@ -18,7 +18,7 @@ FOLLOWING_URL = 'https://github.com/YOUR-USERNAME?tab=following'
 FOLLOWERS_URL = 'https://github.com/YOUR-USERNAME?tab=followers'
 
 # Don't unfollow these accounts
-dontunfollow = {'god', 'jesus', 'obama', 'davidBowie'}
+dontunfollow = {'jesus', 'obama', 'davidBowie'}
 
 # Set up the WebDriver
 options = Options()
