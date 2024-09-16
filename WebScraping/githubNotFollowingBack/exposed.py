@@ -55,7 +55,6 @@ def scrape_usernames(url):
             break
 
         if len(usernames) == last_count:
-            # No new users were found
             break
 
         last_count = len(usernames)
