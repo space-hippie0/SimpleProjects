@@ -40,5 +40,5 @@ export const checkUser = async () => {
     } catch (error){
         console.error(error);
     }
-}
+};
 
