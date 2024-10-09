@@ -5,7 +5,7 @@ import {ArrowRight, Calendar, Clock, LinkIcon} from "lucide-react";
 import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card";
 import TestimonialCarousel from "@/components/testimonials"
 import Testimonials from "@/components/testimonials";
-import Effectboard from "@/components/effect-board";
+import Billboard from "@/components/billboard";
 
 
 const features = [
