@@ -5,6 +5,7 @@ import {ArrowRight, Calendar, Clock, LinkIcon} from "lucide-react";
 import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card";
 import TestimonialCarousel from "@/components/testimonials"
 import Testimonials from "@/components/testimonials";
+import Effectboard from "@/components/effect-board";
 
 
 const features = [
@@ -49,16 +50,20 @@ export default function Home() {
                     <h1 className="gradient-title">
                         Manage Your Time
                     </h1>
-                    <p className="text-x1 text-gray-600 mb-10">
+                    <p className="text-x1 text-gray-400 mb-10">
                         The app that turns chaos into calendar magic!
                         Now you can actually pretend to have your life in order!
                         Enjoy at your own risk!
                     </p>
-                    <Link href="\dashboard">
-                        <Button size="lg" className="text-lg">
+                    <Link href="/dashboard">
+                        <Button
+                            size="lg"
+                            className="text-lg bg-gradient-to-r from-black to-gray-900 text-white hover:from-red-600 hover:to-red-800"
+                        >
                             Get Started <ArrowRight className="ml-2 h-5 w-5"/>
                         </Button>
                     </Link>
+
                 </div>
                 <div className="lg:w-1/2 flex justify-center">
                     <div className="relative w-full max-w-md aspect-square">
@@ -72,14 +77,18 @@ export default function Home() {
                 </div>
             </div>
             <div className="mb-24">
-                <h2 className="text-3xl font-bold text-center mb-12 text-red-400">Key Features</h2>
+                <h2 className="text-3xl font-bold text-center mb-12 bg-gradient-to-r from-orange-500 to-yellow-300 bg-clip-text text-transparent">
+                    Key Features
+                </h2>
+
+
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     {features.map((feature, index) => {
                         return (
                             <Card key={index}>
                                 <CardHeader>
-                                    <feature.icon className="w-12 h-12 text-red-400 mb-4 mx-auto"/>
-                                    <CardTitle className="text-center text-red-400">{feature.title}</CardTitle>
+                                    <feature.icon className="w-12 h-12 text-green-400 mb-4 mx-auto"/>
+                                    <CardTitle className="text-center text-black">{feature.title}</CardTitle>
                                 </CardHeader>
                                 <CardContent>
                                     <p className="text-center text-gray-600">{feature.description}</p>
@@ -90,35 +99,45 @@ export default function Home() {
             </div>
 
             <div className="mb-24">
-                <h2 className="text-3xl font-bold text-center mb-12 text-red-400">User Reviews</h2>
+                <h2 className="text-3xl font-bold text-center mb-12 bg-gradient-to-r from-orange-500 to-yellow-300 bg-clip-text text-transparent">
+                    User Reviews
+                </h2>
                 <Testimonials/>
             </div>
 
 
             <div className="mb-24">
-                <h2 className="text-3xl font-bold text-center mb-12 text-red-400">Route to Success</h2>
+                <h2 className="text-3xl font-bold text-center mb-12 bg-gradient-to-r from-blue-400 to-white bg-clip-text text-transparent">
+                    Route to Success
+                </h2>
+
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                    {howItWorks.map((step, index)=>(
-                    <div key={index} className="text-center">
-                        <div className="bg-green-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                            <span className="text-green-600 font-bold text-xl">{index + 1}</span>
+                    {howItWorks.map((step, index) => (
+                        <div key={index} className="text-center">
+                        <div className="bg-green-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-3">
+                            <span className="text-black font-bold text-xl">{index + 1}</span>
                         </div>
-                        <h3 className="text-gray-200 font-semibold text-lg mb-2">{step.step}</h3>
+                        <h3 className="bg-gradient-to-r from-blue-400 to-white bg-clip-text text-transparent font-semibold text-lg mb-0">{step.step}</h3>
                         <p className="text-gray-400">{step.description}</p>
 
                     </div>
                 ))}</div>
             </div>
 
-            <div className="bg-green-200 text-black rounded-lg p-8 text-center">
+            <div className="bg-gradient-to-r from-blue-300 to-gray-200 text-black rounded-lg p-8 text-center">
                 <h2 className="text-3xl font-bold mb-4">Ready to commit?</h2>
                 <p className="text-gray-700 text-xl mb-6">Take-A-Moment to join hundreds of Homo-Sapiens and a couple dozens of Neanderthals in this journey.</p>
                 <Link href="/dashboard">
-                    <Button size="lg" variant="secondary" className="text-green-600">
+                    <Button
+                        size="lg"
+                        className="text-lg bg-gradient-to-r from-black to-gray-900 text-white hover:from-red-600 hover:to-red-800"
+                    >
                         Change Forever <ArrowRight className="ml-2 h-5 w-5"/>
                     </Button>
                 </Link>
+
             </div>
+            <Effectboard/>
 
         </main>
     );
