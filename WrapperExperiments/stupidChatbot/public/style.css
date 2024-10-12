@@ -1,1 +1,125 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #FFC72C, #89CFF0);
+    color: #000;
+}
 
+.chat-container {
+    width: 300px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+#chat-box {
+    height: 400px;
+    overflow-y: auto;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.user-message, .bot-message {
+    color: black;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 8px;
+    max-width: 70%;
+    word-wrap: break-word;
+}
+
+.user-message {
+    background-color: #ffcccb;
+    align-self: flex-end;
+    font-weight: bold;
+    color: darkred;
+}
+
+.bot-message {
+    background-color: #d0e1f9;
+    align-self: flex-start;
+}
+
+input[type="text"] {
+    width: 70%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+button {
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #99ccff;
+    border: none;
+    cursor: pointer;
+}
+
+.mood-buttons {
+    margin-top: 10px;
+}
+
+.mood-btn {
+    padding: 10px;
+    margin-right: 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #99ccff;
+    color: white;
+    transition: background-color 0.3s;
+}
+
+.mood-btn.active {
+    background-color: darkorange;
+}
+
+.history-container {
+    position: absolute;
+    top: 50px;
+    right: 10px;
+    width: 300px;
+    max-height: 200px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    background-color: white;
+    display: none;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.history-item {
+    padding: 5px;
+    border-bottom: 1px solid #ccc;
+}
+
+.history-item:last-child {
+    border-bottom: none;
+}
+
+.history-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+@media (max-width: 1024px) {
+    .history-btn {
+        position: static;
+        margin-top: 10px;
+        margin-left: 10px;
+    }
+
+    .history-container {
+        position: static;
+        width: auto;
+        max-width: 95%;
+        margin-top: 10px;
+    }
+}
