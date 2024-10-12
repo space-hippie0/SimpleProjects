@@ -1,1 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>MertGPT</title>
+</head>
+<body>
+<div class="chat-container">
+    <h1>MertGPT</h1>
+    <div id="chat-box"></div>
+    <input type="text" id="user-input" placeholder="Type your message here...">
+    <button id="send-btn">Send</button>
+
+    <!-- Add buttons for moods -->
+    <div class="mood-buttons">
+        <button class="mood-btn" id="angry-btn">Angry/Sassy</button>
+        <button class="mood-btn" id="funny-btn">Funny</button>
+        <button class="mood-btn" id="flirty-btn">Flirty</button>
+
+        <!-- History Button -->
+        <button class="history-btn" id="history-btn">History</button>
+
+        <!-- History Dropdown -->
+        <div class="history-container" id="history-box"></div>
+    </div>
+</div>
+
+<script src="../script.js"></script>
+<script>
+    const sendButton = document.getElementById("send-btn");
+    const userInput = document.getElementById("user-input");
+    const chatBox = document.getElementById("chat-box");
+
+    const moodButtons = document.querySelectorAll(".mood-btn");
+    let currentMood = "";
+    let chatHistory = [];
+
+    // History Button
+    const historyButton = document.getElementById("history-btn");
+    const historyBox = document.getElementById("history-box");
+
+    // Initialize history box to be hidden
+    historyBox.style.display = "none";
+
+    // Function to update the chat box with current chat history
+    function updateChatBox() {
+        chatBox.innerHTML = ''; // Clear chat box
+        chatHistory.forEach(message => {
+            chatBox.innerHTML += `<div class="user-message">${message}</div>`;
+        });
+    }
+
+    // History button click handler
+    historyButton.addEventListener("click", () => {
+        if (historyBox.style.display === "none" || !historyBox.style.display) {
+            historyBox.style.display = "block";
+            historyBox.innerHTML = '';
+            chatHistory.forEach(item => {
+                historyBox.innerHTML += `<div class="history-item">${item}</div>`;
+            });
+        } else {
+            historyBox.style.display = "none";
+        }
+    });
+
+    // Function to handle sending a message
+    async function handleSendMessage() {
+        const input = userInput.value;
+        if (input) {
+            // Clear chat box before generating new reply
+            chatBox.innerHTML = '';
+            chatHistory.push(`You: ${input}`);
+            chatBox.innerHTML += `<div class="user-message">${input}</div>`;
+            userInput.value = '';
+
+            // Prepare the prompt based on current mood
+            let prompt = `You are an intelligent assistant designed to give direct, informative, and human-like very short answers. Avoid using phrases such as "Here is what I found" or "Tell me if you need further assistance." ${input}`;
+            if (currentMood) {
+                prompt = `You should reply ${currentMood} until further notice. ${prompt}`;
+            }
+
+            // Fetch the response from GPT
+            const response = await fetch('/chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ input: prompt }),
+            });
+
+            const data = await response.json();
+
+            // Add an emoji based on the current mood
+            let emoji = '';
+            if (currentMood.includes("angry")) {
+                emoji = '😠';
+            } else if (currentMood.includes("funny")) {
+                emoji = '😂';
+            } else if (currentMood.includes("flirty")) {
+                emoji = '😉';
+            }
+
+            chatBox.innerHTML += `<div class="bot-message">${data.response} ${emoji}</div>`;
+            chatHistory.push(`Bot: ${data.response} ${emoji}`);
+        }
+    }
+
+    // Send message on clicking the send button
+    sendButton.addEventListener("click", handleSendMessage);
+
+    // Send message on pressing Enter
+    userInput.addEventListener("keypress", (event) => {
+        if (event.key === "Enter") {
+            handleSendMessage();
+        }
+    });
+
+    // Mood button click handlers
+    moodButtons.forEach(button => {
+        button.addEventListener("click", () => {
+            // Reset active state of all buttons
+            moodButtons.forEach(btn => btn.classList.remove("active"));
+            currentMood = "";
+
+            // Set the mood based on clicked button
+            if (button.id === "angry-btn") {
+                currentMood = "angry and sassy";
+            } else if (button.id === "funny-btn") {
+                currentMood = "funny over the top with jokes";
+            } else if (button.id === "flirty-btn") {
+                currentMood = "flirtatious";
+            }
+
+            // Set active state
+            button.classList.add("active");
+        });
+    });
+</script>
+</body>
+</html>
 
