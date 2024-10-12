@@ -1,1 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Lawyer</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="form-container">
+    <h1>AI Lawyer Assistance</h1>
+    <form id="lawForm" action="/submit" method="POST">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br>
+
+        <label for="type">Type:</label>
+        <select id="type" name="type" required>
+            <option value="" disabled selected>Select case type</option>
+            <option value="rent">Rent</option>
+            <option value="inheritance">Inheritance</option>
+            <option value="divorce">Divorce</option>
+        </select><br>
+
+        <label for="description">General description:</label>
+        <textarea id="description" name="description" required></textarea><br>
+
+        <label id="foreigner" for="isForeigner" class="checkbox-label">
+            Are you a foreigner?
+            <input type="checkbox" id="isForeigner" name="isForeigner">
+        </label><br>
+
+        <button type="submit">Submit</button>
+    </form>
+    <div id="response"></div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
 
