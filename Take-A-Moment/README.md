@@ -1,4 +1,4 @@
-## Take-A-Moment
+# Take-A-Moment
 
 The app that turns chaos into calendar magic! Now you can actually pretend to have your life in order! Enjoy at your own risk! 
 
