@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grocery List App</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>Grocery List</h1>
+        <div class="header-buttons">
+            <button onclick="startAddItem()">Add Item</button>
+            <button onclick="showCategoryRankings()">Custom</button>
+            <!-- Added Dropdown for Category Rankings -->
+            <select id="mainRankingSelect" onchange="selectMainRanking()">
+                <option value="">Select Ranking</option>
+            </select>
+        </div>
+    </header>
+
+    <div id="item-list" class="item-list"></div>
+
+    <!-- Smooth Input Form -->
+    <div id="add-item-form" class="add-item-form">
+        <div id="step1" class="form-step">
+            <label for="itemName" class="visually-hidden">Item Name</label>
+            <div class="input-button-container">
+                <div class="autocomplete-container">
+                    <input type="text" id="itemName" placeholder="Enter item name" autocomplete="off" oninput="showSuggestion()" onkeydown="acceptSuggestion(event)">
+                    <span id="itemSuggestion" class="suggestion"></span>
+                </div>
+                <button onclick="nextStep(1)">→</button>
+            </div>
+        </div>
+        <div id="step2" class="form-step">
+            <label for="category" class="visually-hidden">Category</label>
+            <div class="input-button-container">
+                <div class="select-container">
+                    <select id="category">
+                        <option value="Produce">Produce</option>
+                        <option value="Dairy & Eggs">Dairy & Eggs</option>
+                        <option value="Meat, Poultry & Seafood">Meat, Poultry & Seafood</option>
+                        <option value="Bakery & Grains">Bakery & Grains</option>
+                        <option value="Frozen Foods">Frozen Foods</option>
+                        <option value="Beverages">Beverages</option>
+                        <option value="Pantry Staples">Pantry Staples</option>
+                        <option value="Snacks & Sweets">Snacks & Sweets</option>
+                        <option value="Household & Hygiene">Household & Hygiene</option>
+                        <option value="Baby & Pet Supplies">Baby & Pet Supplies</option>
+                    </select>
+                </div>
+                <button onclick="nextStep(2)">→</button>
+            </div>
+        </div>
+        <div id="step3" class="form-step">
+            <label for="price" class="visually-hidden">Price</label>
+            <div class="input-button-container">
+                <div class="input-container">
+                    <input type="number" id="price" placeholder="Enter price" step="0.01">
+                </div>
+                <button onclick="addItem()">Add</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <button onclick="shareList()">Share List</button>
+        <div class="total">Total: $<span id="total-price">0.00</span></div>
+    </footer>
+
+    <!-- Category Rankings Form -->
+    <div id="category-rankings-form" class="category-rankings-form">
+        <h2>Category Rankings</h2>
+        <label for="selectRanking">Select Ranking</label>
+        <select id="selectRanking" onchange="loadRanking()">
+            <option value="">New Ranking</option>
+        </select>
+        <label for="rankingName">Ranking Name</label>
+        <input type="text" id="rankingName" placeholder="Enter ranking name">
+        <div id="categories-list" class="categories-list"></div>
+        <button onclick="saveRanking()">Save Ranking</button>
+        <button onclick="deleteRanking()">Delete Ranking</button>
+        <button onclick="closeCategoryRankings()">Close</button>
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
