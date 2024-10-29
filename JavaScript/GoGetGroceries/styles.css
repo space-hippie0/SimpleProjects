@@ -1,1 +1,349 @@
+/* Reset & Basic Styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    color: #e0e0e0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #1c1c1e, #3a3a3c);
+    overflow: hidden;
+}
+
+.container {
+    width: 100%;
+    max-width: 500px;
+    background-color: #2d2d2f;
+    border-radius: 8px;
+    padding: 1.5em 1em 2.5em; /* Increased bottom padding */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+}
+
+/* Header Styling */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 1em;
+    border-bottom: 1px solid #444;
+}
+
+header h1 {
+    font-size: 1.4em;
+    color: #fff;
+    white-space: nowrap; /* Prevents text from wrapping */
+}
+
+header button {
+    padding: 0.5em 1em;
+    font-size: 0.9em;
+    border: none;
+    color: #1c1c1e;
+    background-color: #f7c1a1;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* Item List Styling */
+.item-list {
+    margin-bottom: 0.5em;
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.8em 0.5em;
+    background-color: #3e3e42;
+    margin-bottom: 0.5em;
+    border-radius: 4px;
+}
+
+.item input {
+    width: 60%;
+    background: none;
+    color: #fff;
+    border: none;
+    font-size: 1em;
+    padding: 0.2em;
+}
+
+.item-category {
+    width: 20%;
+    color: #f7c1a1;
+    font-weight: bold;
+}
+
+/* Footer Styling */
+footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1em;
+    border-top: 1px solid #444;
+}
+
+footer .total {
+    font-size: 1.2em;
+}
+
+footer button {
+    padding: 0.5em 1em;
+    background-color: #f7c1a1;
+    color: #1c1c1e;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* Smooth Input Form */
+.add-item-form {
+    display: none;
+    background-color: #2d2d2f;
+    padding: 1em;
+    border-radius: 8px;
+    margin-top: 1.5em; /* Increased top margin */
+    transition: all 0.3s ease-in-out;
+}
+
+.form-step {
+    display: none;
+    margin-bottom: 1em;
+}
+
+.form-step.active {
+    display: block;
+    animation: slideIn 0.4s ease;
+}
+
+/* Updated Button Styles */
+.input-button-container button,
+.form-step button {
+    padding: 0.5em 1em;
+    background-color: #f7c1a1;
+    color: #1c1c1e;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* styles.css */
+.autocomplete-container {
+    position: relative;
+    width: 100%;
+}
+
+.autocomplete-container input {
+    width: 100%;
+    position: relative;
+    background: transparent;
+    z-index: 0;
+}
+
+.suggestion {
+    position: absolute;
+    top: 40%;
+    left: 0;
+
+    padding: 0.5em;
+    transform: translateY(-50%);
+    color: rgba(255, 255, 255, 0.7);
+    pointer-events: none;
+    z-index: 1;
+    font-family: inherit;
+    font-size: 0.85em;
+    white-space: nowrap;
+}
+
+.item-list h2 {
+    color: #f7c1a1;
+    font-size: 1.2em;
+    margin-top: 1em;
+}
+
+/* Header Buttons Styling */
+.header-buttons {
+    display: flex;
+    gap: 0.5em;
+    align-items: center; /* Align items vertically center */
+    white-space: nowrap; /* Prevent text from wrapping */
+}
+
+.header-buttons button {
+    padding: 0.5em 1em;
+    font-size: 0.9em;
+    border: none;
+    color: #1c1c1e;
+    background-color: #f7c1a1;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.header-buttons select {
+    padding: 0.5em;
+    font-size: 0.9em;
+    border: none;
+    color: #1c1c1e;
+    background-color: #f7c1a1;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* Category Rankings Form Styling */
+.category-rankings-form {
+    display: none;
+    background-color: #2d2d2f;
+    padding: 1em;
+    border-radius: 8px;
+    position: fixed;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.category-rankings-form h2 {
+    margin-bottom: 0.5em;
+    color: #fff;
+}
+
+.category-rankings-form label {
+    display: block;
+    margin-top: 0.5em;
+    color: #e0e0e0;
+}
+
+.category-rankings-form input,
+.category-rankings-form select {
+    width: 100%;
+    padding: 0.5em;
+    margin-top: 0.2em;
+    background-color: #3e3e42;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+}
+
+.categories-list {
+    margin-top: 1em;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.category-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5em 0;
+    border-bottom: 1px solid #444;
+}
+
+.category-item:last-child {
+    border-bottom: none;
+}
+
+.category-item span {
+    color: #e0e0e0;
+}
+
+.category-item button {
+    background-color: #f7c1a1;
+    color: #1c1c1e;
+    border: none;
+    padding: 0.3em 0.5em;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 0.3em;
+}
+
+.category-rankings-form button {
+    padding: 0.5em 0.5em;
+    background-color: #f7c1a1;
+    color: #1c1c1e;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.category-rankings-form button + button {
+    margin-left: 0.5em;
+}
+
+.add-item-form input[type="text"],
+.add-item-form input[type="number"],
+.add-item-form select {
+    width: 100%;
+    max-width: 300px; /* Limit the maximum width */
+    padding: 0.5em;
+    margin-bottom: 0.5em;
+    background-color: #3e3e42;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+}
+
+.input-button-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    margin-bottom: 1em;
+}
+
+.input-button-container button {
+    padding: 0.5em 1em;
+    background-color: #f7c1a1;
+    color: #1c1c1e;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+/* Adjust the autocomplete container to fill available space */
+.autocomplete-container {
+    flex: 1; /* Allows the input to take up remaining space */
+    position: relative;
+    width: 100%;
+}
+
+/* styles.css */
+.visually-hidden {
+    position: absolute;
+    left: -10000px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+/* New container styles */
+.select-container, .input-container {
+    flex: 1;
+}
+
+.select-container select, .input-container input {
+    width: 100%;
+}
 
