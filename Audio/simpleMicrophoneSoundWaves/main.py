@@ -12,7 +12,6 @@ RATE = 16000       # Sampling rate in Hz
 # Initialize PyAudio
 p = pyaudio.PyAudio()
 
-
 class AudioVisualizerApp:
     def __init__(self, root):
         self.root = root
@@ -41,25 +40,25 @@ class AudioVisualizerApp:
         # Create the Plot for Frequency Bars
         self.fig = Figure(figsize=(8, 3), dpi=100)
         self.ax = self.fig.add_subplot(111)
-        self.ax.set_ylim(0, 15)
-        self.ax.set_xlim(0, CHUNK // 8)
-        self.ax.get_xaxis().set_visible(False)
-        self.ax.get_yaxis().set_visible(False)
-        self.ax.set_facecolor("#121212")
+        self.ax.set_ylim(0, 15)                # Limit bar height for compact appearance
+        self.ax.set_xlim(0, CHUNK // 8)        # Fewer columns for smoother visualization
+        self.ax.get_xaxis().set_visible(False)  # Hide x-axis
+        self.ax.get_yaxis().set_visible(False)  # Hide y-axis
+        self.ax.set_facecolor("#121212")        # Set plot background color
 
         # Canvas for Matplotlib
         self.canvas = FigureCanvasTkAgg(self.fig, master=middle_frame)
         self.canvas.draw()
         self.canvas.get_tk_widget().pack(fill="both", expand=True)
 
-        self.bars = None
+        self.bars = None  # To store bar containers
 
         # Bottom Frame for Controls
         bottom_frame = ttk.Frame(root, padding=10, style="Bottom.TFrame")
         bottom_frame.grid(row=2, column=0, sticky="ew")
         bottom_frame.columnconfigure(1, weight=1)
 
-        # Start/Stop Button
+        # Start/Stop Listening Button
         self.is_listening = False
         self.listen_button = ttk.Button(
             bottom_frame,
@@ -77,12 +76,13 @@ class AudioVisualizerApp:
         # Stream and Update Interval
         self.stream = None
         self.update_interval = 20
-        self.previous_magnitudes = np.zeros(CHUNK // 8)
+        self.previous_magnitudes = np.zeros(CHUNK // 8)  # Initialize for smooth transition
 
         # Handle window close event to ensure resources are released
         self.root.protocol("WM_DELETE_WINDOW", self.on_closing)
 
     def toggle_listen(self):
+        """Toggle the listening state for audio visualization."""
         if not self.is_listening:
             self.is_listening = True
             self.listen_button.config(text="Stop Listening")
@@ -95,7 +95,7 @@ class AudioVisualizerApp:
             self.stop_listening()
 
     def start_listening(self):
-        # Start audio stream with smaller buffer
+        """Start the audio stream and begin updating the plot."""
         if self.stream is None:
             try:
                 self.stream = p.open(
@@ -114,7 +114,7 @@ class AudioVisualizerApp:
         self.update_plot()
 
     def stop_listening(self):
-        # Stop the audio stream safely
+        """Stop the audio stream and clear the plot."""
         if self.stream:
             try:
                 self.stream.stop_stream()
@@ -123,18 +123,18 @@ class AudioVisualizerApp:
                 print(f"Error closing stream: {e}")
             finally:
                 self.stream = None
-        # Clear the plot after stopping
         self.ax.clear()
-        self.ax.set_facecolor("#121212")
+        self.ax.set_facecolor("#121212")        # Reset plot background color
         self.canvas.draw()
-        self.bars = None
+        self.bars = None                        # Reset bars for reinitialization
 
     def update_plot(self):
+        """Read audio data, process it, and update the frequency bars."""
         if not self.is_listening or self.stream is None:
             return
 
         try:
-            # Read and process audio data
+            # Read and process audio data from the stream
             data = np.frombuffer(self.stream.read(CHUNK, exception_on_overflow=False), dtype=np.int16)
         except IOError:
             # Handle overflow error by skipping this iteration
@@ -144,7 +144,7 @@ class AudioVisualizerApp:
             self.toggle_listen()
             return
 
-        # Perform FFT to get frequency data
+        # Perform Fast Fourier Transform (FFT) to get frequency data
         freqs = np.fft.fft(data)
         freq_magnitudes = np.abs(freqs[:CHUNK // 2])
 
@@ -155,13 +155,17 @@ class AudioVisualizerApp:
 
         desired_length = CHUNK // 8
         if len(middle_range) >= desired_length:
-            scaling_factor = 0.005
+            scaling_factor = 0.005         # Reduced scaling factor for less sensitivity
             freq_magnitudes = middle_range[:desired_length] * scaling_factor
         else:
             # If not enough data, pad with zeros
-            freq_magnitudes = np.pad(middle_range, (0, desired_length - len(middle_range)), 'constant') * 0.02
+            freq_magnitudes = np.pad(middle_range, (0, desired_length - len(middle_range)), 'constant') * 0.005
 
-        # Smooth transitions with stronger interpolation
+        # Apply a threshold to ignore low-decibel sounds
+        noise_threshold = 0.2  # Threshold value
+        freq_magnitudes = np.where(freq_magnitudes > noise_threshold, freq_magnitudes, 0)
+
+        # Smooth transitions with interpolation
         smoothed_magnitudes = (self.previous_magnitudes * 0.8) + (freq_magnitudes * 0.2)
         self.previous_magnitudes = smoothed_magnitudes
 
@@ -177,30 +181,30 @@ class AudioVisualizerApp:
             for bar, new_height in zip(self.bars, smoothed_magnitudes):
                 bar.set_height(new_height)
 
-        self.canvas.draw_idle()
+        self.canvas.draw_idle()  # Update the canvas without a full redraw
 
         # Schedule the next update
         self.root.after(self.update_interval, self.update_plot)
 
     def on_closing(self):
-        # Ensure that the audio stream is properly closed
+        """Handle the window closing event to ensure resources are released."""
         self.is_listening = False
         self.stop_listening()
         self.root.destroy()
 
-
 # Custom Styles for ttk
 def setup_styles():
+    """Configure custom styles for the application's widgets."""
     style = ttk.Style()
     style.theme_use('clam')
 
-    # Configure styles for frames and labels
+    # Configure styles for frames
     style.configure("Top.TFrame", background="#121212")
     style.configure("Middle.TFrame", background="#121212")
     style.configure("Bottom.TFrame", background="#121212")
 
+    # Configure styles for labels
     style.configure("Title.TLabel", foreground="white", background="#121212", font=("Helvetica", 18, "bold"))
-
     style.configure("Status.TLabel", foreground="white", background="#121212", font=("Helvetica", 12))
 
     # Configure style for the start/stop button
@@ -210,11 +214,10 @@ def setup_styles():
                     font=("Helvetica", 12, "bold"),
                     padding=10)
 
-    # Hover effect for the button
+    # Hover effect for the start/stop button
     style.map("TButton",
               background=[('active', '#1ed760')],
               foreground=[('active', 'white')])
-
 
 if __name__ == "__main__":
     root = tk.Tk()
