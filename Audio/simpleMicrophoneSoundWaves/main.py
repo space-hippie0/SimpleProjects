@@ -18,7 +18,7 @@ class AudioVisualizerApp:
         self.root = root
         self.root.title("Frequency Visualizer")
         self.root.geometry("800x500")
-        self.root.configure(bg="#121212")  # Dark background for the window
+        self.root.configure(bg="#121212")
 
         # Configure grid layout for responsive design
         self.root.rowconfigure(1, weight=1)
@@ -41,11 +41,11 @@ class AudioVisualizerApp:
         # Create the Plot for Frequency Bars
         self.fig = Figure(figsize=(8, 3), dpi=100)
         self.ax = self.fig.add_subplot(111)
-        self.ax.set_ylim(0, 15)                # Limit bar height for compact appearance
-        self.ax.set_xlim(0, CHUNK // 8)        # Fewer columns for smoother visualization
+        self.ax.set_ylim(0, 15)
+        self.ax.set_xlim(0, CHUNK // 8)
         self.ax.get_xaxis().set_visible(False)
         self.ax.get_yaxis().set_visible(False)
-        self.ax.set_facecolor("#121212")        # Set plot background to match window
+        self.ax.set_facecolor("#121212")
 
         # Canvas for Matplotlib
         self.canvas = FigureCanvasTkAgg(self.fig, master=middle_frame)
@@ -76,8 +76,8 @@ class AudioVisualizerApp:
 
         # Stream and Update Interval
         self.stream = None
-        self.update_interval = 20               # Update interval in milliseconds
-        self.previous_magnitudes = np.zeros(CHUNK // 8)  # Initialize for smooth transition
+        self.update_interval = 20
+        self.previous_magnitudes = np.zeros(CHUNK // 8)
 
         # Handle window close event to ensure resources are released
         self.root.protocol("WM_DELETE_WINDOW", self.on_closing)
@@ -125,9 +125,9 @@ class AudioVisualizerApp:
                 self.stream = None
         # Clear the plot after stopping
         self.ax.clear()
-        self.ax.set_facecolor("#121212")        # Reset plot background to match window
+        self.ax.set_facecolor("#121212")
         self.canvas.draw()
-        self.bars = None                        # Reset bars for reinitialization
+        self.bars = None
 
     def update_plot(self):
         if not self.is_listening or self.stream is None:
@@ -149,13 +149,13 @@ class AudioVisualizerApp:
         freq_magnitudes = np.abs(freqs[:CHUNK // 2])
 
         # Focus on the middle range of frequencies and downsample
-        middle_start = CHUNK // 16    # Start index for middle frequencies
-        middle_end = CHUNK // 4        # End index for middle frequencies
+        middle_start = CHUNK // 16      # Start index for middle frequencies
+        middle_end = CHUNK // 4         # End index for middle frequencies
         middle_range = freq_magnitudes[middle_start:middle_end]
 
-        desired_length = CHUNK // 8    # 32 bars
+        desired_length = CHUNK // 8
         if len(middle_range) >= desired_length:
-            scaling_factor = 0.005  # Reduce this value to make bars go up less
+            scaling_factor = 0.005
             freq_magnitudes = middle_range[:desired_length] * scaling_factor
         else:
             # If not enough data, pad with zeros
@@ -177,7 +177,7 @@ class AudioVisualizerApp:
             for bar, new_height in zip(self.bars, smoothed_magnitudes):
                 bar.set_height(new_height)
 
-        self.canvas.draw_idle()  # Use draw_idle to avoid full redraw
+        self.canvas.draw_idle()
 
         # Schedule the next update
         self.root.after(self.update_interval, self.update_plot)
@@ -192,7 +192,7 @@ class AudioVisualizerApp:
 # Custom Styles for ttk
 def setup_styles():
     style = ttk.Style()
-    style.theme_use('clam')  # Use 'clam' theme as base
+    style.theme_use('clam')
 
     # Configure styles for frames and labels
     style.configure("Top.TFrame", background="#121212")
@@ -206,7 +206,7 @@ def setup_styles():
     # Configure style for the start/stop button
     style.configure("TButton",
                     foreground="white",
-                    background="#1DB954",  # Spotify green as an example
+                    background="#1DB954",
                     font=("Helvetica", 12, "bold"),
                     padding=10)
 
@@ -221,5 +221,4 @@ if __name__ == "__main__":
     setup_styles()
     app = AudioVisualizerApp(root)
     root.mainloop()
-    # Close the PyAudio instance
     p.terminate()
