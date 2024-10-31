@@ -155,7 +155,8 @@ class AudioVisualizerApp:
 
         desired_length = CHUNK // 8    # 32 bars
         if len(middle_range) >= desired_length:
-            freq_magnitudes = middle_range[:desired_length] * 0.02
+            scaling_factor = 0.005  # Reduce this value to make bars go up less
+            freq_magnitudes = middle_range[:desired_length] * scaling_factor
         else:
             # If not enough data, pad with zeros
             freq_magnitudes = np.pad(middle_range, (0, desired_length - len(middle_range)), 'constant') * 0.02
