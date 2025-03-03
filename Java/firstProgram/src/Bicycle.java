@@ -7,6 +7,10 @@ public class Bicycle {
     private String productionDate;
 
     // methods
+    public void setColor(String newcolor){
+        color = newcolor;
+    }
+
     public String getColor(){
         return color;
     }
@@ -15,8 +19,8 @@ public class Bicycle {
         return modelNumber;
     }
 
-    void setModelNumber(int newMN){
-        modelNumber = newMN;
+    public void setModelNumber(int modelNumber){
+        this.modelNumber = modelNumber;
     }
 
     
