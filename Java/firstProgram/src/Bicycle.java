@@ -11,5 +11,13 @@ public class Bicycle {
         return color;
     }
 
+    public int getModelNumber(){
+        return modelNumber;
+    }
+
+    void setModelNumber(int newMN){
+        modelNumber = newMN;
+    }
+
     
 }

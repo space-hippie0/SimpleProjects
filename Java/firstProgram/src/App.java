@@ -5,5 +5,6 @@ public class App {
         Bicycle bike = new Bicycle();
         System.out.println(bike.getColor());
         bike.setModelNumber(333);
+        System.out.println(bike.getModelNumber());
     }
 }
