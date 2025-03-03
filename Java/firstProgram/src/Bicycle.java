@@ -6,6 +6,11 @@ public class Bicycle {
     private String color;
     private String productionDate;
 
+    // constructor
+    public Bicycle(String wheelType){
+        this.wheelType = wheelType;
+    }
+
     // methods
     public void setColor(String newcolor){
         color = newcolor;
